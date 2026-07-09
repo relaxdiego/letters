@@ -125,32 +125,21 @@ his family. A print shop may ask for it.
 
 ## Recovery: what to do if letters.maglana.com is dead
 
-The site is published at the custom domain `letters.maglana.com`. Domains must
-be paid for and eventually one will not be.
+The full guide for a person reading this repository is `content/recovery.md`
+(also the site page "If this site disappears"). Open that file first and work
+down its list — backup addresses, clearing dead custom domains, the Wayback
+Machine, this repository, and paper.
 
-Two custom domains sit in front of this site, in two *different* repositories,
-and they chain together:
-
-    relaxdiego.github.io/letters
-      →  relaxdiego.com/letters
-        →  letters.maglana.com
+When you are asked to get the *website* working again after a domain dies, do
+those steps, then these technical ones the family guide does not cover.
 
 **There is no `CNAME` file, and adding one would do nothing.** This site is
 published by a GitHub Actions workflow, and GitHub ignores `CNAME` files
 entirely when publishing that way. The custom domain lives only in the
-repository settings. Do not send anyone looking for a file.
-
-**Clear the custom domain in the settings, not in the repository:**
-
-1. On `relaxdiego/letters` (this repository), go to **Settings → Pages** and
-   clear the **Custom domain** box. This removes the hop to
-   `letters.maglana.com`.
-2. If `relaxdiego.com` has also expired, do the same on
-   `relaxdiego/relaxdiego.github.io`, which is a **separate repository**. Its
-   custom domain is what redirects every project page under this account to
-   `relaxdiego.com`. Clearing it here has no effect on that.
-
-With both cleared, the site serves directly at:
+repository settings. Do not send anyone looking for a file. Clear **Custom
+domain** under **Settings → Pages** on this repository, and if needed on the
+separate `relaxdiego/relaxdiego.github.io` repository — details are in
+`content/recovery.md`. With both cleared, the site serves at:
 
 <https://relaxdiego.github.io/letters>
 
@@ -167,21 +156,23 @@ baseURL = "https://relaxdiego.github.io/letters/"
 ```
 
 The links inside the site are all relative to `baseURL`, so this one line is
-what makes them point to the right place under the new address. Nothing else
-needs to change.
+what makes them point to the right place under the new address. Rebuild after
+you change it.
 
-While you are there, the footer on every page and the `content/recovery.md`
-page both name the old domain. Updating that wording is kind but optional —
-those references are what tell a lost reader where to look, so if you change
-them, keep the Wayback Machine and GitHub links intact.
+While you are there, the footer (on every page *except* recovery) and
+`content/recovery.md` name backup places. Updating that wording is kind but
+optional — those references are what tell a lost reader where to look, so if
+you change them, keep the Wayback Machine and GitHub links intact.
 
 ## The rest of the repository
 
 - `content/letters/` — **the letters.** The reason this exists.
 - `content/about.md`, `content/recovery.md`, `content/_index.md` — the about
-  page, the "If this site disappears" page, and the homepage introduction.
+  page, the "If this site disappears" page, and the homepage (title only
+  today; an intro body is optional).
 - `layouts/` — the entire design. Plain HTML, CSS inlined into `baseof.html` so
-  that any single saved page renders correctly on its own.
+  that any single saved page renders correctly on its own. The footer is
+  omitted on the recovery page so that page is not repeated under itself.
 - `hugo.toml` — configuration. A handful of lines.
 - `HUGO_VERSION` — the pinned version, in plain text, readable without tools.
 - `devbox.json`, `devbox.lock`, `.envrc` — optional developer convenience that

@@ -37,8 +37,7 @@ someone outside the immediate household, because houses burn down. Paper is the
 last link in the chain and the only one that does not depend on a company
 staying in business. After the first volume exists, reprint every year or two,
 or whenever there are enough new letters to justify it — and update the wording
-in `content/recovery.md` and `README.md`, which currently both say no printed
-copy exists.
+in `content/recovery.md`, which currently says no printed copy exists.
 
 **Keep the family map updated.** The document that says where everything is:
 accounts, passwords, the domain registrar, where the physical copies went, who
