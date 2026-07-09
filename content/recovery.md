@@ -14,34 +14,47 @@ through the step you are stuck on.
 
 The letters exist in five places. Work down the list until one of them works.
 
-## 1. The backup web address
+## 1. The backup web addresses
 
-Try this address first:
+Try these two, in order:
+
+<https://relaxdiego.com/letters>
 
 <https://relaxdiego.github.io/letters>
 
-This is the same website, served directly by GitHub, without the custom
-`maglana.com` name in front of it. Most of the time, when the main address
-dies, this one is still alive.
+These are the same website, served by GitHub under my other names instead of
+`letters.maglana.com`. Often, when one address dies, another is still alive.
 
-## 2. If the backup address sends you somewhere dead
+## 2. If the backup addresses send you somewhere dead
 
-Sometimes the backup address will bounce you back to `letters.maglana.com`
-and leave you stuck. That happens because the repository still contains a
-small file telling GitHub to use the custom domain name. Once the domain name
-is gone, that instruction points nowhere.
+Each of these addresses is really a signpost pointing at the next one. Today
+the chain runs like this:
 
-The fix is to delete that instruction. There are two places to do it, and you
-should do both:
+    relaxdiego.github.io/letters  →  relaxdiego.com/letters  →  letters.maglana.com
 
-1. Go to <https://github.com/relaxdiego/letters>. Find the file at
-   `static/CNAME`. Open it, and use the delete (trash can) button. Save the
-   change.
-2. On the same repository, click **Settings**, then **Pages** in the left
-   sidebar. Under **Custom domain**, clear the box and save.
+If a name near the end of that chain has died, the signposts before it will
+still point at it, and you will land on nothing. The fix is to take the dead
+signposts down. Each one is a setting on GitHub, not a file — you cannot fix
+this by deleting anything from the repository.
 
-Wait a few minutes, then try <https://relaxdiego.github.io/letters> again.
-It should now show the letters.
+You will need to be signed in to GitHub as me, or as someone I have given
+access. Then:
+
+1. Go to <https://github.com/relaxdiego/letters>. Click **Settings**, then
+   **Pages** in the left sidebar. Under **Custom domain**, clear the box and
+   save. This stops the site pointing at `letters.maglana.com`.
+2. If `relaxdiego.com` is also dead, do the same again on a *different*
+   repository: <https://github.com/relaxdiego/relaxdiego.github.io>. Settings,
+   then Pages, then clear **Custom domain** and save. This stops everything
+   pointing at `relaxdiego.com`.
+
+That second step surprises people, so I will say it plainly: the redirect to
+`relaxdiego.com` is controlled by that other repository, not by this one.
+Clearing it here is not enough.
+
+Wait a few minutes, then try <https://relaxdiego.github.io/letters> again. With
+both custom domains cleared, GitHub serves the letters at that address
+directly, and no expired domain name can get in the way.
 
 ## 3. The Wayback Machine
 

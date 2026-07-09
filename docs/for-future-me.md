@@ -46,10 +46,13 @@ to contact. These letters are worth nothing if nobody can find the door. Note
 in that map that `letters.maglana.com` is registered, when it renews, and that
 `AGENTS.md` in this repo explains how to un-break the site if the domain lapses.
 
-**Check the domain renewal.** If it ever lapses on purpose, follow the recovery
-steps in `AGENTS.md` — delete `static/CNAME`, clear the custom domain in
-Settings → Pages, change `baseURL` in `hugo.toml`. Then the site lives on at
-`relaxdiego.github.io/letters` and the fallback chain still holds.
+**Check the domain renewal.** Two domains sit in front of this site:
+`letters.maglana.com` on this repo, and `relaxdiego.com` on the separate
+`relaxdiego.github.io` repo, which redirects every project page to itself. If
+either lapses, follow the recovery steps in `AGENTS.md` — clear the custom
+domain under Settings → Pages on whichever repo owns the dead name, then change
+`baseURL` in `hugo.toml`. There is no `CNAME` file to delete; GitHub ignores
+those when publishing from Actions.
 
 **Check the archive occasionally.** Visit
 <https://web.archive.org/web/*/letters.maglana.com> and confirm recent snapshots

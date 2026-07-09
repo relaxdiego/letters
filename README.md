@@ -44,11 +44,16 @@ shorten, or "improve" the letters.
 The site normally lives at **letters.maglana.com**. If that address stops
 working, the letters are still safe. Try each of these in order:
 
-1. **The backup address:** <https://relaxdiego.github.io/letters>
-2. **If that address sends you somewhere dead,** it is because this repository
-   still contains a file pointing at the old custom domain. Delete the file
-   `static/CNAME` here on GitHub, and clear the **Custom domain** box under
-   **Settings → Pages**. The backup address will then serve the site directly.
+1. **The backup addresses:** <https://relaxdiego.com/letters>, then
+   <https://relaxdiego.github.io/letters>
+2. **If those addresses send you somewhere dead,** it is because they redirect
+   onwards — `relaxdiego.github.io/letters` → `relaxdiego.com/letters` →
+   `letters.maglana.com` — and a name late in that chain has expired. The
+   custom domain is a GitHub *setting*, not a file in this repository. Clear
+   the **Custom domain** box under **Settings → Pages** here, and, if
+   `relaxdiego.com` is also dead, clear it again on the separate
+   `relaxdiego/relaxdiego.github.io` repository. Then
+   `relaxdiego.github.io/letters` serves the site directly.
 3. **The Wayback Machine,** a public library of saved web pages:
    <https://web.archive.org/web/*/letters.maglana.com> — pick any date on the
    calendar to read the site as it was on that day.

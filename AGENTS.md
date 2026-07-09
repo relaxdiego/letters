@@ -126,20 +126,29 @@ his family. A print shop may ask for it.
 ## Recovery: what to do if letters.maglana.com is dead
 
 The site is published at the custom domain `letters.maglana.com`. Domains must
-be paid for and eventually one will not be. When that happens, GitHub Pages
-still hosts the site, but two settings still point at the dead domain and must
-be cleared. Both are easy.
+be paid for and eventually one will not be.
 
-**Delete the custom domain in two places:**
+Two custom domains sit in front of this site, in two *different* repositories,
+and they chain together:
 
-1. Delete the file `static/CNAME` from this repository. Hugo copies that file
-   into the built site, and its only job is to tell GitHub Pages "serve this at
-   letters.maglana.com". With the domain gone, it is telling GitHub to send
-   visitors nowhere.
-2. In the repository on GitHub, go to **Settings → Pages**, and clear the
-   **Custom domain** box.
+    relaxdiego.github.io/letters  →  relaxdiego.com/letters  →  letters.maglana.com
 
-Then push the change. The site will build and serve at:
+**There is no `CNAME` file, and adding one would do nothing.** This site is
+published by a GitHub Actions workflow, and GitHub ignores `CNAME` files
+entirely when publishing that way. The custom domain lives only in the
+repository settings. Do not send anyone looking for a file.
+
+**Clear the custom domain in the settings, not in the repository:**
+
+1. On `relaxdiego/letters` (this repository), go to **Settings → Pages** and
+   clear the **Custom domain** box. This removes the hop to
+   `letters.maglana.com`.
+2. If `relaxdiego.com` has also expired, do the same on
+   `relaxdiego/relaxdiego.github.io`, which is a **separate repository**. Its
+   custom domain is what redirects every project page under this account to
+   `relaxdiego.com`. Clearing it here has no effect on that.
+
+With both cleared, the site serves directly at:
 
 <https://relaxdiego.github.io/letters>
 
@@ -175,7 +184,8 @@ them, keep the Wayback Machine and GitHub links intact.
 - `HUGO_VERSION` — the pinned version, in plain text, readable without tools.
 - `devbox.json`, `devbox.lock`, `.envrc` — optional developer convenience that
   installs that same Hugo automatically. Disposable. See above.
-- `static/CNAME` — the custom domain. See recovery, above.
+- `static/images/` — the few pictures the letters refer to, kept here rather
+  than hotlinked from anywhere else.
 - `.github/workflows/deploy.yml` — builds, deploys, then asks the Wayback
   Machine to save the changed pages. The archive step is allowed to fail.
 - `PERMISSION.md` — the author's grant of reproduction rights to his family.
