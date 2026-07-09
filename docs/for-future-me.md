@@ -47,11 +47,15 @@ in that map that `letters.maglana.com` is registered, when it renews, and that
 
 **Check the domain renewal.** Two domains sit in front of this site:
 `letters.maglana.com` on this repo, and `relaxdiego.com` on the separate
-`relaxdiego.github.io` repo, which redirects every project page to itself. If
-either lapses, follow the recovery steps in `AGENTS.md` — clear the custom
-domain under Settings → Pages on whichever repo owns the dead name, then change
-`baseURL` in `hugo.toml`. There is no `CNAME` file to delete; GitHub ignores
-those when publishing from Actions.
+`relaxdiego.github.io` repo, which redirects every project page to itself. They
+are one location under different names; if either lapses, the public site is
+effectively gone for readers. To put the website back, follow the technical
+steps in `AGENTS.md` — clear the custom domain under Settings → Pages on
+whichever repo owns the dead name, then change `baseURL` in `hugo.toml`. There
+is no `CNAME` file to delete; GitHub ignores those when publishing from
+Actions. Do not put those steps on the family recovery page — for readers who
+only need the letters, the next stops are the Wayback Machine and this
+repository.
 
 **Check the archive occasionally.** Visit
 <https://web.archive.org/web/*/letters.maglana.com> and confirm recent snapshots

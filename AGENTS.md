@@ -125,21 +125,29 @@ his family. A print shop may ask for it.
 
 ## Recovery: what to do if letters.maglana.com is dead
 
-The full guide for a person reading this repository is `content/recovery.md`
-(also the site page "If this site disappears"). Open that file first and work
-down its list — backup addresses, clearing dead custom domains, the Wayback
-Machine, this repository, and paper.
+The guide for a person who only wants to *read* the letters is
+`content/recovery.md` (also the site page "If this site disappears"). It
+points at the Wayback Machine, this repository, and paper. It deliberately
+does **not** send the family hunting for backup web addresses —
+`letters.maglana.com`, `relaxdiego.com/letters`, and
+`relaxdiego.github.io/letters` are the same site under different names, and
+when the custom domain dies the others usually die with it (they redirect into
+the dead name).
 
-When you are asked to get the *website* working again after a domain dies, do
-those steps, then these technical ones the family guide does not cover.
+When you are asked to get the *website* working again after a domain dies,
+the technical steps below are yours, not the family's.
 
 **There is no `CNAME` file, and adding one would do nothing.** This site is
 published by a GitHub Actions workflow, and GitHub ignores `CNAME` files
 entirely when publishing that way. The custom domain lives only in the
-repository settings. Do not send anyone looking for a file. Clear **Custom
-domain** under **Settings → Pages** on this repository, and if needed on the
-separate `relaxdiego/relaxdiego.github.io` repository — details are in
-`content/recovery.md`. With both cleared, the site serves at:
+repository settings. Do not send anyone looking for a file.
+
+Clear **Custom domain** under **Settings → Pages** on this repository. That
+stops the site pointing at `letters.maglana.com`. If `relaxdiego.com` is also
+dead, do the same on the separate `relaxdiego/relaxdiego.github.io`
+repository — that other repo, not this one, controls the redirect from
+`relaxdiego.github.io` to `relaxdiego.com`. With both custom domains cleared,
+the site serves at:
 
 <https://relaxdiego.github.io/letters>
 
@@ -160,9 +168,9 @@ what makes them point to the right place under the new address. Rebuild after
 you change it.
 
 While you are there, the footer (on every page *except* recovery) and
-`content/recovery.md` name backup places. Updating that wording is kind but
-optional — those references are what tell a lost reader where to look, so if
-you change them, keep the Wayback Machine and GitHub links intact.
+`content/recovery.md` name the Wayback Machine and this repository. Updating
+that wording is kind but optional — those references are what tell a lost
+reader where to look, so if you change them, keep both links intact.
 
 ## The rest of the repository
 

@@ -12,53 +12,14 @@ how to get them back. You do not need to be a programmer. If any of this feels
 difficult, hand this page to a capable AI assistant and ask it to walk you
 through the step you are stuck on.
 
-The letters exist in five places. Work down the list until one of them works.
+The letters exist in three places beyond this website. Work down the list until
+one of them works.
 
-## 1. The backup web addresses
+Do not hunt for other web addresses of mine — `relaxdiego.com`,
+`relaxdiego.github.io`, and so on. They are the same site under different
+names. If this address has stopped working, that location is gone. Move on.
 
-Try these two, in order:
-
-<https://relaxdiego.com/letters>
-
-<https://relaxdiego.github.io/letters>
-
-These are the same website, served by GitHub under my other names instead of
-`letters.maglana.com`. Often, when one address dies, another is still alive.
-
-## 2. If the backup addresses send you somewhere dead
-
-Each of these addresses is really a signpost pointing at the next one. Today
-the chain runs like this:
-
-    relaxdiego.github.io/letters
-      →  relaxdiego.com/letters
-        →  letters.maglana.com
-
-If a name near the end of that chain has died, the signposts before it will
-still point at it, and you will land on nothing. The fix is to take the dead
-signposts down. Each one is a setting on GitHub, not a file — you cannot fix
-this by deleting anything from the repository.
-
-You will need to be signed in to GitHub as me, or as someone I have given
-access. Then:
-
-1. Go to <https://github.com/relaxdiego/letters>. Click **Settings**, then
-   **Pages** in the left sidebar. Under **Custom domain**, clear the box and
-   save. This stops the site pointing at `letters.maglana.com`.
-2. If `relaxdiego.com` is also dead, do the same again on a *different*
-   repository: <https://github.com/relaxdiego/relaxdiego.github.io>. Settings,
-   then Pages, then clear **Custom domain** and save. This stops everything
-   pointing at `relaxdiego.com`.
-
-That second step surprises people, so I will say it plainly: the redirect to
-`relaxdiego.com` is controlled by that other repository, not by this one.
-Clearing it here is not enough.
-
-Wait a few minutes, then try <https://relaxdiego.github.io/letters> again. With
-both custom domains cleared, GitHub serves the letters at that address
-directly, and no expired domain name can get in the way.
-
-## 3. The Wayback Machine
+## 1. The Wayback Machine
 
 The Wayback Machine is a library that keeps copies of old web pages. Every
 time I published a letter, a copy was sent there automatically. Go to:
@@ -70,7 +31,7 @@ saved. Click any circle, then click a time, and you will see the site as it
 looked on that day. Click through the letters and read them there. The copies
 are real pages, not summaries.
 
-## 4. The repository itself
+## 2. The repository itself
 
 Everything lives at:
 
@@ -97,7 +58,7 @@ Or:
 The file `AGENTS.md` in the repository tells that assistant everything it
 needs to know. It is written for exactly this moment.
 
-## 5. Paper
+## 3. Paper
 
 This step is the one I cannot promise you.
 
@@ -115,11 +76,11 @@ way it is.
 
 ---
 
-That is the whole chain. Four of those five places are real today, they are run
+That is the whole chain. Two of those three places are real today, they are run
 by different people in different countries, and losing the letters would take
-all four failing at once.
+both failing at once.
 
-The fifth is up to whoever reads this. It may be me. It may be you.
+The third is up to whoever reads this. It may be me. It may be you.
 
 I would rather over-prepare than have you go looking for me one day and find
 nothing there.
