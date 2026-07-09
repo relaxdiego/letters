@@ -63,6 +63,19 @@ a {
   color: inherit;
 }
 
+/* Inline code and fenced blocks (recovery page, mostly). Browsers pick a
+   monospace face that reads larger than the serif body at the same size. */
+code {
+  font-family: ui-monospace, "Cascadia Code", Menlo, Consolas,
+               "DejaVu Sans Mono", monospace;
+  font-size: 0.875em;
+}
+
+pre {
+  overflow-x: auto;
+  line-height: 1.5;
+}
+
 .date {
   color: #6b635a;
   font-size: 0.85rem;
