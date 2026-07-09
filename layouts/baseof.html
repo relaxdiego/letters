@@ -4,6 +4,31 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} — {{ site.Title }}{{ end }}</title>
+{{/* Social preview cards. Plain meta tags — no scripts, no third party.
+     The description is taken from the letter's own opening words, so the
+     letters keep a frontmatter of nothing but title and date. */}}
+{{- $title := cond .IsHome site.Title .Title -}}
+{{- $desc := "" -}}
+{{- with .Summary }}{{ $desc = . | plainify }}{{ end -}}
+{{- if not $desc }}{{ $desc = site.Params.description }}{{ end -}}
+{{/* Collapse the newlines a Markdown paragraph leaves behind, or they end up
+     inside the meta tag's content attribute. */}}
+{{- $desc = $desc | replaceRE "\\s+" " " | strings.TrimSpace | truncate 200 -}}
+{{- $card := "images/card.png" | absURL -}}
+<meta name="description" content="{{ $desc }}">
+<meta property="og:site_name" content="{{ site.Title }}">
+<meta property="og:title" content="{{ $title }}">
+<meta property="og:description" content="{{ $desc }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:type" content="{{ if eq .Section "letters" }}article{{ else }}website{{ end }}">
+<meta property="og:image" content="{{ $card }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{{ site.Title }}">
+{{- if and (eq .Section "letters") (not .Date.IsZero) }}
+<meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+{{- end }}
+<meta name="twitter:card" content="summary_large_image">
 <!-- The stylesheet is written inline so that any single saved copy of this
      page — an archive snapshot, a file on a disk — still looks right on its
      own, with nothing left to download. -->

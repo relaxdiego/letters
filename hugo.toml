@@ -5,3 +5,8 @@ title = "Letters to My Sons"
 # baseURL to "https://relaxdiego.github.io/letters/" and rebuild.
 
 disableKinds = ["taxonomy", "term", "rss"]
+
+[params]
+  # Used for the social preview card on pages that have no text of their own,
+  # such as the homepage.
+  description = "Letters from Mark Maglana to his sons."
