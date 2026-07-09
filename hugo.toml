@@ -1,0 +1,7 @@
+baseURL = "https://letters.maglana.com/"
+title = "Letters to My Sons"
+
+# Nothing here is clever on purpose. If the custom domain ever dies, change
+# baseURL to "https://relaxdiego.github.io/letters/" and rebuild.
+
+disableKinds = ["taxonomy", "term", "rss"]

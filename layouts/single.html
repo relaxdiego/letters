@@ -1,0 +1,10 @@
+{{ define "main" }}
+<nav class="nav"><a href="{{ site.Home.RelPermalink }}">← All letters</a></nav>
+<article>
+  <header class="letter-heading">
+    <h1>{{ .Title }}</h1>
+    {{ if not .Date.IsZero }}<span class="date">{{ .Date.Format "2 January 2006" }}</span>{{ end }}
+  </header>
+  {{ .Content }}
+</article>
+{{ end }}

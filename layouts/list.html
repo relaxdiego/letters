@@ -1,0 +1,18 @@
+{{ define "main" }}
+<header class="masthead">
+  <h1>{{ site.Title }}</h1>
+  {{ with .Content }}<div class="intro">{{ . }}</div>{{ end }}
+</header>
+<nav class="nav">
+  <a href="{{ (site.GetPage "/about").RelPermalink }}">About these letters</a> &nbsp;·&nbsp;
+  <a href="{{ (site.GetPage "/recovery").RelPermalink }}">If this site disappears</a>
+</nav>
+<ul class="letters">
+{{ range (where site.RegularPages "Section" "letters").ByDate.Reverse }}
+  <li>
+    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    <span class="date">{{ .Date.Format "2 January 2006" }}</span>
+  </li>
+{{ end }}
+</ul>
+{{ end }}

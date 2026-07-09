@@ -1,0 +1,108 @@
+name: Build and deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # devbox + devbox.lock give CI the exact same Hugo, from the exact same
+      # nixpkgs commit, as a developer gets by cd-ing into this directory.
+      - name: Install devbox
+        uses: jetify-com/devbox-install-action@v0.14.0
+        with:
+          enable-cache: "true"
+          devbox-version: "0.16.0"
+
+      # devbox.json and HUGO_VERSION name the same version in two places. This
+      # is the only thing keeping them honest. HUGO_VERSION is what a human (or
+      # an AI agent) reads decades from now when devbox no longer exists, so it
+      # must never drift from what we actually build with.
+      - name: Check the pinned Hugo version
+        run: |
+          want=$(tr -d '[:space:]' < HUGO_VERSION)
+          got=$(devbox run -- hugo version)
+          echo "HUGO_VERSION: $want"
+          echo "devbox hugo:  $got"
+          case "$got" in
+            *"v${want}+extended"*) echo "ok: versions agree, extended build" ;;
+            *) echo "::error::HUGO_VERSION says $want but devbox provides: $got"; exit 1 ;;
+          esac
+
+      - name: Build the site
+        run: devbox run -- hugo --gc
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
+
+  # Ask the Wayback Machine to keep its copy current. This is a courtesy, not a
+  # requirement: if archive.org is slow, rate-limiting us, or down, the deploy
+  # above has already succeeded and nothing here is allowed to undo that.
+  archive:
+    needs: deploy
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Save the homepage and any changed letters
+        continue-on-error: true
+        run: |
+          set -u
+          site="https://letters.maglana.com"
+          before="${{ github.event.before }}"
+
+          # On a normal push, save only the letters this push touched. On a
+          # manual run or a first/forced push, fall back to saving them all.
+          if [ -n "$before" ] \
+            && [ "$before" != "0000000000000000000000000000000000000000" ] \
+            && git cat-file -e "${before}^{commit}" 2>/dev/null; then
+            changed=$(git diff --name-only --diff-filter=d \
+              "$before" "${{ github.sha }}" -- content/letters/)
+          else
+            changed=$(git ls-files content/letters/)
+          fi
+
+          urls="$site/"
+          for f in $changed; do
+            case "$f" in
+              *.md) ;;
+              *) continue ;;
+            esac
+            slug=$(basename "$f" .md)
+            urls="$urls $site/letters/$slug/"
+          done
+
+          for u in $urls; do
+            echo "Saving $u"
+            curl -sS -m 120 -o /dev/null -w '  -> HTTP %{http_code}\n' \
+              "https://web.archive.org/save/$u" || echo "  -> failed, continuing"
+            sleep 5
+          done

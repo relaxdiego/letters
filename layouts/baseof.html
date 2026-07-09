@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} — {{ site.Title }}{{ end }}</title>
+<!-- The stylesheet is written inline so that any single saved copy of this
+     page — an archive snapshot, a file on a disk — still looks right on its
+     own, with nothing left to download. -->
+<style>
+html {
+  font-size: 18px;
+}
+
+body {
+  margin: 0;
+  background: #faf6ef;
+  color: #26221d;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia,
+               Cambria, "Times New Roman", Times, serif;
+  line-height: 1.7;
+}
+
+.page {
+  max-width: 34rem;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 3rem;
+}
+
+h1 {
+  font-size: 1.6rem;
+  font-weight: normal;
+  line-height: 1.3;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+.date {
+  color: #6b635a;
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+.nav {
+  margin-bottom: 3rem;
+  font-size: 0.85rem;
+}
+
+.nav a {
+  text-decoration: none;
+}
+
+.nav a:hover {
+  text-decoration: underline;
+}
+
+/* Homepage: the site title, then the list of letters. */
+.masthead {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.masthead h1 {
+  font-size: 1.9rem;
+}
+
+.masthead .intro {
+  margin-top: 1.5rem;
+  text-align: left;
+}
+
+.letters {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.letters li {
+  margin-bottom: 1.75rem;
+}
+
+.letters a {
+  text-decoration: none;
+}
+
+.letters a:hover {
+  text-decoration: underline;
+}
+
+.letters .date {
+  display: block;
+}
+
+/* A letter: the heading sits like the opening of a book chapter. */
+.letter-heading {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.letter-heading .date {
+  display: block;
+  margin-top: 0.75rem;
+}
+
+/* The colophon, quiet at the foot of every page. */
+.colophon {
+  margin-top: 6rem;
+  color: #6b635a;
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+</style>
+</head>
+<body>
+<div class="page">
+{{ block "main" . }}{{ end }}
+{{ partial "footer.html" . }}
+</div>
+</body>
+</html>
