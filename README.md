@@ -1,7 +1,6 @@
 # Letters
 
-This repository holds letters from your father, Mark Maglana, written to his
-sons.
+This repository holds letters from Mark Maglana written to his sons.
 
 ## The letters are right here, and you do not need any software to read them
 
@@ -41,31 +40,10 @@ shorten, or "improve" the letters.
 
 ## If the website has disappeared
 
-The site normally lives at **letters.maglana.com**. If that address stops
-working, the letters are still safe. Try each of these in order:
-
-1. **The backup addresses:** <https://relaxdiego.com/letters>, then
-   <https://relaxdiego.github.io/letters>
-2. **If those addresses send you somewhere dead,** it is because they redirect
-   onwards — `relaxdiego.github.io/letters` → `relaxdiego.com/letters` →
-   `letters.maglana.com` — and a name late in that chain has expired. The
-   custom domain is a GitHub *setting*, not a file in this repository. Clear
-   the **Custom domain** box under **Settings → Pages** here, and, if
-   `relaxdiego.com` is also dead, clear it again on the separate
-   `relaxdiego/relaxdiego.github.io` repository. Then
-   `relaxdiego.github.io/letters` serves the site directly.
-3. **The Wayback Machine,** a public library of saved web pages:
-   <https://web.archive.org/web/*/letters.maglana.com> — pick any date on the
-   calendar to read the site as it was on that day.
-4. **This repository itself:** <https://github.com/relaxdiego/letters> — the
-   letters are the plain `.md` files in `content/letters/`, readable directly,
-   or handed to an AI assistant as described above.
-5. **Paper.** No printed copy exists yet. If someone in the family has since
-   made one, ask around for it. If nobody has, please be the one who does.
-
-The site's own [If this site disappears](https://letters.maglana.com/recovery/)
-page says the same thing at more length, and appears in every Wayback Machine
-snapshot.
+The letters are still safe. The full guide is in
+[`content/recovery.md`](content/recovery.md) — open that file and work down
+the list. When the site is still up, the same guide is also at
+[letters.maglana.com/recovery](https://letters.maglana.com/recovery/).
 
 ---
 
