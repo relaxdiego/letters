@@ -30,7 +30,9 @@ These are the same website, served by GitHub under my other names instead of
 Each of these addresses is really a signpost pointing at the next one. Today
 the chain runs like this:
 
-    relaxdiego.github.io/letters  →  relaxdiego.com/letters  →  letters.maglana.com
+    relaxdiego.github.io/letters
+      →  relaxdiego.com/letters
+        →  letters.maglana.com
 
 If a name near the end of that chain has died, the signposts before it will
 still point at it, and you will land on nothing. The fix is to take the dead

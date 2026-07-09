@@ -131,7 +131,9 @@ be paid for and eventually one will not be.
 Two custom domains sit in front of this site, in two *different* repositories,
 and they chain together:
 
-    relaxdiego.github.io/letters  →  relaxdiego.com/letters  →  letters.maglana.com
+    relaxdiego.github.io/letters
+      →  relaxdiego.com/letters
+        →  letters.maglana.com
 
 **There is no `CNAME` file, and adding one would do nothing.** This site is
 published by a GitHub Actions workflow, and GitHub ignores `CNAME` files
