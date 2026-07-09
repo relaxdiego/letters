@@ -187,8 +187,10 @@ reader where to look, so if you change them, keep both links intact.
   installs that same Hugo automatically. Disposable. See above.
 - `static/images/` — the few pictures the letters refer to, kept here rather
   than hotlinked from anywhere else.
-- `.github/workflows/deploy.yml` — builds, deploys, then asks the Wayback
-  Machine to save the changed pages. The archive step is allowed to fail.
+- `.github/workflows/deploy.yml` — builds and deploys to GitHub Pages.
+- `.github/workflows/archive.yml` — asks the Wayback Machine to save the
+  homepage and recently changed letters, at most twice a day (scheduled).
+  Allowed to fail; never blocks deploy.
 - `PERMISSION.md` — the author's grant of reproduction rights to his family.
 - `docs/for-future-me.md` — the author's own maintenance checklist.
 

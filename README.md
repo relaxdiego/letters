@@ -96,10 +96,11 @@ This project never depends on them:
 If that ever stops working, delete `devbox.json`, `devbox.lock` and `.envrc`.
 They are machinery. Nothing in `content/` will notice.
 
-To publish, push to `main`. GitHub Actions builds the site, deploys it to
-GitHub Pages, and then asks the Wayback Machine to save the homepage and any
-letters the push changed. That last step is allowed to fail without failing the
-deploy.
+To publish, push to `main`. GitHub Actions builds the site and deploys it to
+GitHub Pages. A separate workflow asks the Wayback Machine to save the homepage
+and any recently changed letters at most twice a day (06:00 and 18:00 UTC), so
+rapid pushes do not hammer Save Page Now. That archive step is allowed to fail
+without affecting the live site.
 
 To add a letter, create a file in `content/letters/` named
 `YYYY-MM-DD-short-slug.md`, give it a `title` and a `date`, write the letter in

@@ -1,0 +1,126 @@
+# Ask the Wayback Machine to keep its copy current — at most twice a day.
+#
+# This is separate from deploy on purpose. Save Page Now throttles hard from
+# cloud IPs (GitHub runners), so every push must not fire a save. A fixed
+# schedule is the simplest rate limit: two runs per day, no matter how often
+# main is pushed. Each run covers the homepage plus any letters touched since
+# the previous window.
+#
+# This is a courtesy, not a requirement. If archive.org is slow, rate-limiting
+# us, or down, nothing here is allowed to affect the live site.
+#
+# GitHub has no "start this workflow on date X" switch. The cool-down step below
+# is a normal script check: scheduled runs still fire, but they exit without
+# calling Save Page Now until STARTS_ON. After that date, the same schedule
+# starts saving on its own — nothing to re-enable by hand.
+
+name: Archive to Wayback Machine
+
+on:
+  schedule:
+    # 06:00 and 18:00 UTC — twelve hours apart, two runs per calendar day.
+    - cron: "0 6,18 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      # Temporary cool-down after a prior burst of Save Page Now calls from CI.
+      # Once STARTS_ON is in the past this step always continues; you may delete
+      # the whole step later if you want less noise in the file.
+      - name: Cool-down gate
+        id: cooldown
+        env:
+          # First UTC calendar day on which saves are allowed (inclusive).
+          STARTS_ON: "2026-07-11"
+        run: |
+          set -u
+          today=$(date -u +%Y-%m-%d)
+          if [ "$today" \< "$STARTS_ON" ]; then
+            echo "Cool-down until $STARTS_ON UTC (today is $today)."
+            echo "Not calling Save Page Now. Later scheduled runs will start on their own."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Cool-down over (starts_on=$STARTS_ON, today=$today). Proceeding."
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.cooldown.outputs.skip != 'true'
+        with:
+          fetch-depth: 0
+
+      - name: Save the homepage and any recently changed letters
+        if: steps.cooldown.outputs.skip != 'true'
+        continue-on-error: true
+        run: |
+          set -u
+          site="https://letters.maglana.com"
+
+          # Catch everything since the previous twice-daily run, with a little
+          # slack for clock skew and a run that finished late.
+          changed=$(
+            git log --since="14 hours ago" --name-only --pretty=format: \
+              --diff-filter=d -- content/letters/ \
+              | sort -u
+          )
+
+          urls="$site/"
+          for f in $changed; do
+            case "$f" in
+              *.md) ;;
+              *) continue ;;
+            esac
+            slug=$(basename "$f" .md)
+            urls="$urls $site/letters/$slug/"
+          done
+
+          # Save Page Now is slow (20s+ on a good day) and throttles hard from
+          # cloud IPs, so allow real time and retry once. A save that fails is
+          # never allowed to fail a deploy — but it must not pass silently
+          # either. The recovery page tells readers the archive exists; if it
+          # does not, someone has to be told.
+          saved=0
+          failed=""
+          for u in $urls; do
+            echo "Saving $u"
+            code=$(curl -sS -m 300 -L -o /dev/null -w '%{http_code}' \
+              "https://web.archive.org/save/$u" 2>/dev/null || echo 000)
+            if [ "$code" != "200" ]; then
+              sleep 30
+              code=$(curl -sS -m 300 -L -o /dev/null -w '%{http_code}' \
+                "https://web.archive.org/save/$u" 2>/dev/null || echo 000)
+            fi
+            if [ "$code" = "200" ]; then
+              saved=$((saved + 1))
+              echo "  -> saved"
+            else
+              failed="$failed $u"
+              echo "  -> FAILED (HTTP $code)"
+            fi
+            sleep 12
+          done
+
+          echo "saved $saved page(s)"
+          if [ -n "$failed" ]; then
+            echo "::warning title=Wayback Machine save reported an error::Check these:$failed"
+            {
+              echo "### Wayback Machine saves reported an error"
+              echo ""
+              echo "GitHub runners are often throttled by Save Page Now. Note that"
+              echo "an error code does not always mean the page was missed — a 523"
+              echo "in particular is often returned for a page that was saved."
+              echo ""
+              echo "Check first, at \`https://web.archive.org/web/2026/<url>\`, and"
+              echo "only re-save from an ordinary machine if the page is really absent:"
+              echo ""
+              for u in $failed; do
+                echo "- \`curl -L https://web.archive.org/save/$u\`"
+              done
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi

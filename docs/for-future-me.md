@@ -9,8 +9,10 @@ Everything you need to remember about running this thing.
 3. Write it in plain Markdown. No shortcodes.
 4. Commit. Push.
 
-That is the whole thing. GitHub Actions builds the site, deploys it, and pings
-the Wayback Machine for the homepage and the letter you just added.
+That is the whole thing. GitHub Actions builds the site and deploys it. A
+separate scheduled workflow pings the Wayback Machine at most twice a day
+(06:00 and 18:00 UTC) for the homepage and any letters touched since the
+previous run — so many pushes in one day still mean only two archive attempts.
 
 To see it first: `hugo server`. If you have devbox and direnv, `cd` into this
 directory and Hugo is simply there. Otherwise `devbox run -- hugo server`, or
@@ -59,9 +61,12 @@ repository.
 
 **Check the archive occasionally.** Visit
 <https://web.archive.org/web/*/letters.maglana.com> and confirm recent snapshots
-exist. The workflow's archive step is never allowed to fail the deploy, so a
-broken archive cannot stop the site from publishing. It now prints a warning and
-a job summary when a save fails, but nobody reads those unless they look.
+exist. The archive workflow (`.github/workflows/archive.yml`) runs on a fixed
+schedule, not on every push, and is never allowed to fail a deploy — so a broken
+archive cannot stop the site from publishing. It prints a warning and a job
+summary when a save fails, but nobody reads those unless they look. You can also
+run it by hand from the Actions tab ("Archive to Wayback Machine") if you want a
+save outside the schedule.
 
 Expect it to fail sometimes. The Wayback Machine's Save Page Now throttles
 requests from cloud IP addresses, and GitHub's runners live on cloud IPs. The
