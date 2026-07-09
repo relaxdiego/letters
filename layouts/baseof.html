@@ -161,7 +161,12 @@ pre {
 <body>
 <div class="page">
 {{ block "main" . }}{{ end }}
+{{/* The recovery page is the long form of this note; do not repeat it. */}}
+{{ $isRecovery := false }}
+{{ with .File }}{{ if eq .LogicalName "recovery.md" }}{{ $isRecovery = true }}{{ end }}{{ end }}
+{{ if not $isRecovery }}
 {{ partial "footer.html" . }}
+{{ end }}
 </div>
 </body>
 </html>
