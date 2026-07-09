@@ -1,6 +1,6 @@
 # Letters
 
-This repository holds letters from Mark Maglana written to his sons.
+This repository holds letters Mark Maglana wrote to his sons.
 
 ## The letters are right here, and you do not need any software to read them
 
@@ -49,8 +49,10 @@ the list. When the site is still up, the same guide is also at
 
 ## For developers
 
-The site is [Hugo](https://gohugo.io), with no theme and no dependencies. The
-layouts in `layouts/` are a few dozen lines of HTML with the CSS inlined.
+The site is made with [Hugo](https://gohugo.io), with no theme and no
+dependencies. The layouts in `layouts/` are a few dozen lines of HTML with the
+CSS inlined so that it still renders as intended when viewed on the [Wayback
+Machine](https://web.archive.org/web/*/letters.maglana.com).
 
 Hugo is the only tool this project needs, and its version is pinned to
 `0.163.3` in two places that must always agree:
