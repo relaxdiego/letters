@@ -128,13 +128,19 @@ jobs:
 
           echo "saved $saved page(s)"
           if [ -n "$failed" ]; then
-            echo "::warning title=Wayback Machine save failed::Not archived:$failed"
-            echo "### Wayback Machine saves failed" >> "$GITHUB_STEP_SUMMARY"
-            echo "" >> "$GITHUB_STEP_SUMMARY"
-            echo "GitHub runners are often throttled by Save Page Now." >> "$GITHUB_STEP_SUMMARY"
-            echo "Re-save these by hand from a normal machine:" >> "$GITHUB_STEP_SUMMARY"
-            echo "" >> "$GITHUB_STEP_SUMMARY"
-            for u in $failed; do
-              echo "- \`curl -L https://web.archive.org/save/$u\`" >> "$GITHUB_STEP_SUMMARY"
-            done
+            echo "::warning title=Wayback Machine save reported an error::Check these:$failed"
+            {
+              echo "### Wayback Machine saves reported an error"
+              echo ""
+              echo "GitHub runners are often throttled by Save Page Now. Note that"
+              echo "an error code does not always mean the page was missed — a 523"
+              echo "in particular is often returned for a page that was saved."
+              echo ""
+              echo "Check first, at \`https://web.archive.org/web/2026/<url>\`, and"
+              echo "only re-save from an ordinary machine if the page is really absent:"
+              echo ""
+              for u in $failed; do
+                echo "- \`curl -L https://web.archive.org/save/$u\`"
+              done
+            } >> "$GITHUB_STEP_SUMMARY"
           fi

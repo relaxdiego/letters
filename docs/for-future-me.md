@@ -63,7 +63,17 @@ a job summary when a save fails, but nobody reads those unless they look.
 Expect it to fail sometimes. The Wayback Machine's Save Page Now throttles
 requests from cloud IP addresses, and GitHub's runners live on cloud IPs. The
 same request usually succeeds in about twenty seconds from an ordinary machine.
-When the workflow reports failures, re-save them from your laptop:
+
+Do not trust the error code either way. Save Page Now sometimes answers `523`
+for a page it has in fact just saved, and its CDX index lags hours behind. The
+only reliable check is to fetch the snapshot back:
+
+    curl -sI -L "https://web.archive.org/web/2026/https://letters.maglana.com/"
+
+Pace those checks too — playback throttles as hard as saving does, and a
+throttled request looks exactly like a missing snapshot if you are careless.
+
+When a page really is absent, re-save it from your laptop:
 
     curl -L "https://web.archive.org/save/https://letters.maglana.com/"
 
