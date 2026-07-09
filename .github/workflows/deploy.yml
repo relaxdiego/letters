@@ -100,9 +100,41 @@ jobs:
             urls="$urls $site/letters/$slug/"
           done
 
+          # Save Page Now is slow (20s+ on a good day) and throttles hard from
+          # cloud IPs, so allow real time and retry once. A save that fails is
+          # never allowed to fail the deploy — but it must not pass silently
+          # either. The recovery page tells readers the archive exists; if it
+          # does not, someone has to be told.
+          saved=0
+          failed=""
           for u in $urls; do
             echo "Saving $u"
-            curl -sS -m 120 -o /dev/null -w '  -> HTTP %{http_code}\n' \
-              "https://web.archive.org/save/$u" || echo "  -> failed, continuing"
-            sleep 5
+            code=$(curl -sS -m 300 -L -o /dev/null -w '%{http_code}' \
+              "https://web.archive.org/save/$u" 2>/dev/null || echo 000)
+            if [ "$code" != "200" ]; then
+              sleep 30
+              code=$(curl -sS -m 300 -L -o /dev/null -w '%{http_code}' \
+                "https://web.archive.org/save/$u" 2>/dev/null || echo 000)
+            fi
+            if [ "$code" = "200" ]; then
+              saved=$((saved + 1))
+              echo "  -> saved"
+            else
+              failed="$failed $u"
+              echo "  -> FAILED (HTTP $code)"
+            fi
+            sleep 12
           done
+
+          echo "saved $saved page(s)"
+          if [ -n "$failed" ]; then
+            echo "::warning title=Wayback Machine save failed::Not archived:$failed"
+            echo "### Wayback Machine saves failed" >> "$GITHUB_STEP_SUMMARY"
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo "GitHub runners are often throttled by Save Page Now." >> "$GITHUB_STEP_SUMMARY"
+            echo "Re-save these by hand from a normal machine:" >> "$GITHUB_STEP_SUMMARY"
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            for u in $failed; do
+              echo "- \`curl -L https://web.archive.org/save/$u\`" >> "$GITHUB_STEP_SUMMARY"
+            done
+          fi

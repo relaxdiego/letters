@@ -56,8 +56,27 @@ those when publishing from Actions.
 
 **Check the archive occasionally.** Visit
 <https://web.archive.org/web/*/letters.maglana.com> and confirm recent snapshots
-exist. The workflow's archive step is allowed to fail silently, which means it
-can fail silently for a long time without anyone noticing.
+exist. The workflow's archive step is never allowed to fail the deploy, so a
+broken archive cannot stop the site from publishing. It now prints a warning and
+a job summary when a save fails, but nobody reads those unless they look.
+
+Expect it to fail sometimes. The Wayback Machine's Save Page Now throttles
+requests from cloud IP addresses, and GitHub's runners live on cloud IPs. The
+same request usually succeeds in about twenty seconds from an ordinary machine.
+When the workflow reports failures, re-save them from your laptop:
+
+    curl -L "https://web.archive.org/save/https://letters.maglana.com/"
+
+To re-seed everything — after a big batch of new letters, or if the archive
+looks thin — loop over the letters, pausing between each so you are not
+throttled:
+
+    for f in content/letters/*.md; do
+      slug=$(basename "$f" .md)
+      curl -sS -m 300 -L -o /dev/null \
+        "https://web.archive.org/save/https://letters.maglana.com/letters/$slug/"
+      sleep 12
+    done
 
 ## Things not to do
 
