@@ -1,11 +1,13 @@
 # Drafts
 
-Unfinished letters wait here. They use the same file format as the finished
-letters in `content/letters/`, but nothing in this folder appears on the
-website or in the Wayback Machine.
+Unfinished thoughts wait here. Files in this folder are free-form — plain
+text, no required format, often named with just a timestamp. Nothing in this
+folder appears on the website or in the Wayback Machine.
 
 One thing to know: this repository is public, so a draft here can be read by
 anyone who finds the repository. A draft is unpublished, not private.
 
-To publish a draft, move the file into `content/letters/` and change the date
-— in the file name and inside the file — to the day you publish it.
+To publish a draft, turn it into a proper letter: create a file in
+`content/letters/` named `YYYY-MM-DD-short-slug.md`, with `title` and `date`
+frontmatter (copy any finished letter to see the shape), dated the day you
+publish it. Then delete the draft file.

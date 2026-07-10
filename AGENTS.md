@@ -49,19 +49,22 @@ Keep it that way. If you add a letter, match the format exactly.
 
 ## Drafts
 
-Unfinished letters live in `drafts/`, at the repository root, in exactly the
-same file format as finished letters. Hugo never reads that folder, so a draft
-is not on the website and has no address, and the archive workflow only
-watches `content/`, so a draft is never sent to the Wayback Machine. It is,
-however, visible to anyone who looks at this public repository — a draft is
-unpublished, not private.
+Unfinished thoughts live in `drafts/`, at the repository root. A draft is
+**free-form**: it may be a bare paragraph with no frontmatter, no title, and a
+file name that is only a timestamp. Do not expect the letter format there, and
+do not "fix" a draft to match it — the author shapes a draft into a letter
+himself when he publishes it.
 
-To publish a draft: move it to `content/letters/`, and update both dates —
-the one in the file name and the one in the frontmatter — to the day it is
-published. Nothing else changes.
+Hugo never reads that folder, so a draft is not on the website and has no
+address, and the archive workflow only watches `content/`, so a draft is never
+sent to the Wayback Machine. It is, however, visible to anyone who looks at
+this public repository — a draft is unpublished, not private.
 
-The one rule applies to drafts too. They are his words, half-finished on
-purpose. Do not rewrite, polish, or complete them.
+To publish a draft: create a proper letter file in `content/letters/` —
+frontmatter with `title` and `date`, file named `YYYY-MM-DD-short-slug.md`,
+dated the day it is published — then delete the draft file. If you are asked
+to help with this, format the words; do not reword them. The one rule applies
+to drafts too. They are his words, half-finished on purpose.
 
 ## How to rebuild the website
 
