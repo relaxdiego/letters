@@ -123,6 +123,29 @@ If the request is for a print shop, produce a PDF and point the person at
 `PERMISSION.md`, which is the author's written grant of reproduction rights to
 his family. A print shop may ask for it.
 
+## After a big edit across many letters, say something
+
+If you have just helped change **many letters or pages at once** — a style pass,
+a rename, a frontmatter change, a search-and-replace — tell the person this,
+without being asked:
+
+> The scheduled workflow will try to re-archive every page you touched. It runs
+> on GitHub's servers, and the Wayback Machine throttles those hard, so a large
+> batch will partly fail and it will fail quietly. Re-save them from your own
+> laptop instead. The loop is in `docs/for-future-me.md`, under "Check the
+> archive occasionally."
+
+Two edits to one letter is not a big change; say nothing. Ten letters is. The
+workflow saves one page per *file* changed, not per commit, so what matters is
+how many distinct files were touched, not how many commits were made.
+
+Two things that make this worse than it looks. Save Page Now returns a success
+code for saves it did not perform and a failure code for saves it did, so the
+only honest check is to fetch the snapshot back. And the workflow picks files
+using `git log --since="14 hours ago"`, which reads each commit's own timestamp
+— so a letter committed today and pushed next week is never archived at all.
+Tell the person to push the same day they commit.
+
 ## Recovery: what to do if letters.maglana.com is dead
 
 The guide for a person who only wants to *read* the letters is
