@@ -11,7 +11,7 @@ Everything you need to remember about running this thing.
 
 That is the whole thing. GitHub Actions builds the site and deploys it. A
 separate scheduled workflow pings the Wayback Machine at most twice a day
-(06:00 and 18:00 UTC) for the homepage and any letters touched since the
+(06:00 and 18:00 UTC) for the homepage and any page touched since the
 previous run — so many pushes in one day still mean only two archive attempts.
 
 To see it first: `hugo server`. If you have devbox and direnv, `cd` into this
@@ -28,6 +28,28 @@ at `sinulatan.wordpress.com` (originally `letterstomikee.wordpress.com`), which
 covered 2007 to 2015. Their frontmatter carries the original publication
 timestamp, not just the date, because two pairs of letters share a day and the
 time is what keeps them in order.
+
+## Editing a letter you already published
+
+Now and then you reread one and fix a comma or a clumsy sentence. That is fine.
+The site rebuilds, and the Wayback Machine saves the letter again on the next
+scheduled run, so the archive ends up holding both versions. Nothing is lost.
+
+**But push on the same day you commit.**
+
+The archive workflow asks git "which files changed in the last fourteen hours?"
+Git answers using each commit's own timestamp — not the moment you pushed it.
+Commit on Sunday and push on Wednesday, and the commit is three days old by the
+time GitHub can see it at all. Every run decides nothing changed, the corrected
+letter is never saved again, and the archive keeps serving the version with the
+mistake in it. Forever.
+
+Running the workflow by hand from the Actions tab does not rescue this. That run
+asks the same question and gets the same answer.
+
+If you did push late, save the page yourself from your laptop:
+
+    curl -L "https://web.archive.org/save/https://letters.maglana.com/letters/THE-SLUG/"
 
 ## The occasional things
 
