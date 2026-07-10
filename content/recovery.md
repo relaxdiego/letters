@@ -18,8 +18,8 @@ nothing there.
 
 ## 1. The Wayback Machine
 
-The Wayback Machine is a library that keeps copies of old web pages. Every
-time I published a letter, a copy was sent there automatically. Go to:
+The Wayback Machine is a library that keeps copies of old web pages. Twice a
+day, copies of these pages were sent there automatically. Go to:
 
 <https://web.archive.org/web/*/letters.maglana.com>
 
