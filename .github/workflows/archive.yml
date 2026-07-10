@@ -3,8 +3,8 @@
 # This is separate from deploy on purpose. Save Page Now throttles hard from
 # cloud IPs (GitHub runners), so every push must not fire a save. A fixed
 # schedule is the simplest rate limit: two runs per day, no matter how often
-# main is pushed. Each run covers the homepage plus any letters touched since
-# the previous window.
+# main is pushed. Each run covers the homepage plus any page touched since the
+# previous window.
 #
 # This is a courtesy, not a requirement. If archive.org is slow, rate-limiting
 # us, or down, nothing here is allowed to affect the live site.
@@ -55,7 +55,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Save the homepage and any recently changed letters
+      - name: Save the homepage and any recently changed pages
         if: steps.cooldown.outputs.skip != 'true'
         continue-on-error: true
         run: |
@@ -66,18 +66,27 @@ jobs:
           # slack for clock skew and a run that finished late.
           changed=$(
             git log --since="14 hours ago" --name-only --pretty=format: \
-              --diff-filter=d -- content/letters/ \
+              --diff-filter=d -- content/ \
               | sort -u
           )
 
+          # The homepage every run; everything else only when it changed. The
+          # about and recovery pages matter here as much as the letters: Save
+          # Page Now does not follow links, so a page nobody saves is a dead
+          # link inside the archive.
           urls="$site/"
           for f in $changed; do
             case "$f" in
-              *.md) ;;
-              *) continue ;;
+              content/_index.md) ;;   # the homepage, already in the list
+              content/letters/*.md)
+                slug=$(basename "$f" .md)
+                urls="$urls $site/letters/$slug/"
+                ;;
+              content/*.md)
+                slug=$(basename "$f" .md)
+                urls="$urls $site/$slug/"
+                ;;
             esac
-            slug=$(basename "$f" .md)
-            urls="$urls $site/letters/$slug/"
           done
 
           # Save Page Now is slow (20s+ on a good day) and throttles hard from

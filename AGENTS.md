@@ -189,7 +189,7 @@ reader where to look, so if you change them, keep both links intact.
   than hotlinked from anywhere else.
 - `.github/workflows/deploy.yml` — builds and deploys to GitHub Pages.
 - `.github/workflows/archive.yml` — asks the Wayback Machine to save the
-  homepage and recently changed letters, at most twice a day (scheduled).
+  homepage and any recently changed page, at most twice a day (scheduled).
   Allowed to fail; never blocks deploy.
 - `PERMISSION.md` — the author's grant of reproduction rights to his family.
 - `docs/for-future-me.md` — the author's own maintenance checklist.
