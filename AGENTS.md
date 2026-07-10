@@ -47,6 +47,22 @@ them by date.
 
 Keep it that way. If you add a letter, match the format exactly.
 
+## Drafts
+
+Unfinished letters live in `drafts/`, at the repository root, in exactly the
+same file format as finished letters. Hugo never reads that folder, so a draft
+is not on the website and has no address, and the archive workflow only
+watches `content/`, so a draft is never sent to the Wayback Machine. It is,
+however, visible to anyone who looks at this public repository — a draft is
+unpublished, not private.
+
+To publish a draft: move it to `content/letters/`, and update both dates —
+the one in the file name and the one in the frontmatter — to the day it is
+published. Nothing else changes.
+
+The one rule applies to drafts too. They are his words, half-finished on
+purpose. Do not rewrite, polish, or complete them.
+
 ## How to rebuild the website
 
 The site is Hugo with a small custom layout in `layouts/`. There is no theme,
@@ -198,6 +214,7 @@ reader where to look, so if you change them, keep both links intact.
 ## The rest of the repository
 
 - `content/letters/` — **the letters.** The reason this exists.
+- `drafts/` — unfinished letters, not yet on the website. See "Drafts" above.
 - `content/about.md`, `content/recovery.md`, `content/_index.md` — the about
   page, the "If this site disappears" page, and the homepage (title only
   today; an intro body is optional).
@@ -216,6 +233,9 @@ reader where to look, so if you change them, keep both links intact.
   Allowed to fail; never blocks deploy.
 - `PERMISSION.md` — the author's grant of reproduction rights to his family.
 - `docs/for-future-me.md` — the author's own maintenance checklist.
+- `docs/phone-shortcut.md` — how the author writes letters from his phone.
+  Describes an iPhone Shortcut that lives on the phone, not in this
+  repository. If it stops working, nothing here is affected.
 
 ## Things deliberately left out
 
