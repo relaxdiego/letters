@@ -2,19 +2,19 @@
 title: About these letters
 ---
 
-The idea of writing these letters started when I was away, studying in
-Australia, far from my wife and our then 6-month-old son. During some of my
-time alone, I often had the urge to share thoughts with him. These were random
-things about learning, laughter, or just life in general. But I was far away,
-and more importantly, he was too young to appreciate any of these things, so I
-decided to write these letters, hoping that one day, when he's older, he will
-find them patiently waiting for him.
+The idea of writing you these letters started when I was away, studying in
+Australia back in 2007. Back in the Philippines at that time, there was
+your mom, and you, Mikey, were just six months old while you, Christian, were yet
+to be conceived. During my time there, I sometimes had the urge to share my thoughts
+with you. They were just random things about life and the lessons I've
+learned along the way. I wanted to keep a record of them so that when you were
+old enough to understand what I had to say, they would be there for you.
 
-My hope is that they somehow help my two sons with their lives. That they will
-hit the ground running, so to speak, from reading about what I learned in my
-short time on this planet. However, like the author of
-[Amador](http://www.amazon.com/Amador-Fernando-Savater/dp/0805032711), I do not
-want to force these lessons upon them. By writing my thoughts here, I can let
-them browse and learn one or two things on their own time.
+My hope is that I'm able to give both of you a head start in life, any way I
+can. Writing these letters is one of those ways. I can't make any guarantees,
+but I hope they help. I also take inspiration from Fernando Savater's book,
+[Amador](http://www.amazon.com/Amador-Fernando-Savater/dp/0805032711), which he
+wrote for his son. Like Mr. Savater, I want to share as much of what I know
+with you, but I also do not want to force it upon you.
 
-Boys, these are for you. I hope they find you well.
+These letters are here for you when you're ready. I hope they find you well.
