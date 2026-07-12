@@ -7,6 +7,11 @@ folder appears on the website or in the Wayback Machine.
 One thing to know: this repository is public, so a draft here can be read by
 anyone who finds the repository. A draft is unpublished, not private.
 
+Another: a draft's own commit lives on a branch named after its timestamp
+(`drafts/YYYY-MM-DD-HHMM`), never on `main` (see `AGENTS.md`). So a draft
+you're looking for may not show up on `main` — check the `drafts/*` branches
+on the repository's GitHub page.
+
 To publish a draft, turn it into a proper letter: create a file in
 `content/letters/` named `YYYY-MM-DD-short-slug.md`, with `title` and `date`
 frontmatter (copy any finished letter to see the shape), dated the day you

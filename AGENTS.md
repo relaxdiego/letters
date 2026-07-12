@@ -55,16 +55,24 @@ file name that is only a timestamp. Do not expect the letter format there, and
 do not "fix" a draft to match it — the author shapes a draft into a letter
 himself when he publishes it.
 
-Hugo never reads that folder, so a draft is not on the website and has no
-address, and the archive workflow only watches `content/`, so a draft is never
-sent to the Wayback Machine. It is, however, visible to anyone who looks at
-this public repository — a draft is unpublished, not private.
+A draft's commit never goes on `main`. It goes on its own branch, named
+`drafts/YYYY-MM-DD-HHMM` after the draft file's own timestamp, pushed to
+origin. `main` should never gain a commit that only adds or edits a file
+under `drafts/`.
 
-To publish a draft: create a proper letter file in `content/letters/` —
-frontmatter with `title` and `date`, file named `YYYY-MM-DD-short-slug.md`,
-dated the day it is published — then delete the draft file. If you are asked
-to help with this, format the words; do not reword them. The one rule applies
-to drafts too. They are his words, half-finished on purpose.
+Hugo never reads that folder, so a draft is not on the website and has no
+address, and the archive workflow only watches `content/` on `main`, so a
+draft is never sent to the Wayback Machine. It is, however, visible to
+anyone who looks at this public repository — a draft branch is unpublished,
+not private.
+
+To publish a draft: create a proper letter file in `content/letters/` on
+`main` — frontmatter with `title` and `date`, file named
+`YYYY-MM-DD-short-slug.md`, dated the day it is published — using the words
+from the draft branch. If you are asked to help with this, format the
+words; do not reword them. The one rule applies to drafts too. They are his
+words, half-finished on purpose. Once the letter is published, the draft
+branch has no further use and can be deleted.
 
 ## How to rebuild the website
 
