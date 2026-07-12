@@ -9,3 +9,7 @@
 .devbox/
 .envrc.*
 !.envrc
+
+# Claude Code skills live here and are meant to be shared via this repo,
+# unlike your global gitignore's default of hiding .claude/.
+!.claude/
