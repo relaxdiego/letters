@@ -1,0 +1,3 @@
+- being with other people is not always about being intellectually stimulates
+- sometimes it’s just to feel connected, safe, loved
+- most times, it’s not for your benefit, but rather for the other person’s

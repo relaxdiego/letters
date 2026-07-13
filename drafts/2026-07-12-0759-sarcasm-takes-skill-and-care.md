@@ -1,0 +1,5 @@
+- Sarcasm is not easily recognized, sometimes even face to face
+- It’s important to follow it up by clarifying that you were being sarcastic, or the more diffusing, “I was just being silly/stupid”
+- You have to be extra conscious with this especially with acquaintances (not close friends)
+- You must learn to read the room, and read it well if you want to use sarcasm as a form of humor.
+- This takes skill to do well. Doing it haphazardly results in strained or even severed relationships.

@@ -1,0 +1,2 @@
+- keep your inner child, it’s important
+- i made a friend at my favorite watering hole by sharing stickers, first time we met, I haven’t met him since, but I consider him a good friend. I like that 

@@ -1,0 +1,5 @@
+- When you were young, the world seemed to revolve around you which is understandable because your mom and I did treat you like that and, for a time, we were pretty much your world.
+- As you get older, your world expands and you find that you’re not the center of it.
+- the way one acts sometimes lags behind our realization of the world not being centered around us
+- that’s what causes the phase of seeming or actually behaving self centered. The world has stopped giving you that leeway once you’re of a certain age
+- you mist consciously wirk on getting your behavior up to speed with this reality, otherwise you lose your place in society, you lose valuable relationships, you miss opportunities in life that could have otherwise given it more meaning.
