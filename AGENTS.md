@@ -50,29 +50,38 @@ Keep it that way. If you add a letter, match the format exactly.
 ## Drafts
 
 Unfinished thoughts live in `drafts/`, at the repository root. A draft is
-**free-form**: it may be a bare paragraph with no frontmatter, no title, and a
-file name that is only a timestamp. Do not expect the letter format there, and
-do not "fix" a draft to match it — the author shapes a draft into a letter
-himself when he publishes it.
+**free-form**: it may be a bare paragraph or a list of bullets, with no
+frontmatter and no title. Do not expect the letter format there, and do not
+"fix" a draft to match it — the author shapes a draft into a letter himself
+when he publishes it.
 
-A draft's commit never goes on `main`. It goes on its own branch, named
-`drafts/YYYY-MM-DD-HHMM` after the draft file's own timestamp, pushed to
-origin. `main` should never gain a commit that only adds or edits a file
-under `drafts/`.
+Draft files are named `YYYY-MM-DD-HHMM-short-slug.md`. The timestamp is when
+the thought was written; the slug is a few words naming what it is about, so
+the folder can be read at a glance. The phone Shortcut writes both without
+being asked (see `docs/phone-shortcut.md`). A slug is a convenience, not a
+promise — it may be clumsy, and renaming a draft file costs nothing.
+
+A draft's commit never goes on `main`. Every draft lives on one long-lived
+branch named `drafts`, which is never merged into `main`. `main` should never
+gain a commit that only adds or edits a file under `drafts/`.
+
+That branch is not a queue and does not need tidying. It simply holds
+whatever is unfinished. To read the drafts on a computer:
+`git fetch && git switch drafts`.
 
 Hugo never reads that folder, so a draft is not on the website and has no
 address, and the archive workflow only watches `content/` on `main`, so a
 draft is never sent to the Wayback Machine. It is, however, visible to
-anyone who looks at this public repository — a draft branch is unpublished,
-not private.
+anyone who looks at this public repository — the `drafts` branch is
+unpublished, not private.
 
 To publish a draft: create a proper letter file in `content/letters/` on
 `main` — frontmatter with `title` and `date`, file named
 `YYYY-MM-DD-short-slug.md`, dated the day it is published — using the words
-from the draft branch. If you are asked to help with this, format the
+from the `drafts` branch. If you are asked to help with this, format the
 words; do not reword them. The one rule applies to drafts too. They are his
-words, half-finished on purpose. Once the letter is published, the draft
-branch has no further use and can be deleted.
+words, half-finished on purpose. Once the letter is published, delete the
+draft file from the `drafts` branch. Delete the file, never the branch.
 
 ## How to rebuild the website
 
