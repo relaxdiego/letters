@@ -53,24 +53,45 @@ convenience. If they ever break, the fix is to delete them and put the plain
 timestamp back in the file name; nothing else depends on them.
 
 4. **Use Model** — Model **On-Device**, Output **Text**. Apple's own model,
-   running on the phone; it needs no network and no account. The prompt, with
-   `LetterBody` inserted at the end:
+   running on the phone; it needs no network and no account. The prompt:
 
    ```
-   Below is a rough note. Name what it is about in 3 to 5 words, as a plain
-   phrase, the way you would finish the sentence "this is about ___".
+   Name the topic of the last note below in 3 to 5 words.
 
-   Do not list keywords or themes. Write one natural phrase.
-   Reply with only that phrase, lowercase, words separated by hyphens.
-   No punctuation. No quotes. No explanation.
+   Write the topic as a short phrase, all lowercase, with hyphens
+   instead of spaces.
+   Reply with the phrase ONLY.
+   DO NOT explain. DO NOT use punctuation. DO NOT repeat these
+   instructions.
 
-   Example note: "- being with other people is not always about being
-   intellectually stimulating - sometimes it's just to feel connected, safe,
-   loved"
-   Example reply: being-with-other-people
+   Note: "- keep your inner child, it's important - i made a friend at
+   my favorite watering hole by sharing stickers"
+   Topic: keeping-your-inner-child
 
-   Note:
+   Note: "- sarcasm is not easily recognized, sometimes even face to
+   face - you must learn to read the room if you want to use sarcasm
+   as humor - doing it haphazardly results in severed relationships"
+   Topic: sarcasm-takes-skill-and-care
+
+   Note: "<LetterBody>"
+   Topic:
    ```
+
+   `<LetterBody>` is the variable; everything else is typed. The prompt ends
+   on the bare word `Topic:` and this is the whole trick. Apple's on-device
+   model has roughly 3 billion parameters — it is small, and a small model
+   **continues patterns** far more reliably than it follows instructions.
+   Having seen the shape twice, it fills in the third. An earlier prompt
+   asked it to finish the sentence *"this is about ___"* and it dutifully
+   answered `this-is-about-a-note`: it copied the words in the prompt
+   instead of reading the note. Nothing after `Topic:` means nothing for it
+   to parrot.
+
+   The two examples are real drafts with their real slugs. That is
+   deliberate — examples teach voice as well as format. Apple's own guidance
+   for this model is the same: give clear commands, show fewer than five
+   examples, shout `DO NOT` in capitals, and never ask it to reason.
+   See <https://developer.apple.com/videos/play/wwdc2025/248/>.
 
 5. **Change Case** — **lowercase**, on the model's answer.
 6. **Replace Text** — four of them, each feeding the next, each with
