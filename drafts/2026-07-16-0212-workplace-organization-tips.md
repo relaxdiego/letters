@@ -1,0 +1,3 @@
+- Place visual timers, checklists, or alarms directly at the workspace or task location so the cue is unavoidable right when action is needed (e.g., a kitchen timer next to homework or phone app notifications tied to specific locations via geofencing).
+- Break every goal into immediate next steps with artificial deadlines and external accountability (e.g., body doubling by working near someone, or pre-committing via apps that lock distractions until a short quota is met).
+- Modify the environment to reduce friction and add structure at the exact moment of performance (e.g., prepare clothes/outfit the night before in plain sight, use noise-cancelling headphones with focus playlists, or have a “launch pad” tray by the door for keys/wallet to prevent last-minute crises).
