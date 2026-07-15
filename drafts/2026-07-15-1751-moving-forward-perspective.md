@@ -1,0 +1,1 @@
+Don’t look backwards too much that you end up not moving forward at all.
