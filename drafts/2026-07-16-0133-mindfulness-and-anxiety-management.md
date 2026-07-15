@@ -1,0 +1,3 @@
+- Recognize the inner voice as separate from you, avoid treating every thought as an emergency, and name anxious thoughts out loud to create distance.
+- Shift attention to body sensations like feet on the floor or breath, and ask “What is actually wrong right now?” to ground in the present moment.
+- Allow uncomfortable feelings to exist without immediate fixing, and engage the creative brain through imagery, drawing anxiety, or mindful walking without devices.
