@@ -1,0 +1,2 @@
+- Finding an excuse for something done wrong or insufficient is a trap
+- It’s stunts your growth
