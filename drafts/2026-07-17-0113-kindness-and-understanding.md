@@ -1,0 +1,1 @@
+Being "right" is overrated. Being kind, curious, and humble is where real growth lives. You don't have to agree with everyone, but you do have to accept that their reality is as real to them as yours is to you. The moment you stop trying to convince people and start trying to understand them, you stop being a child in an adult's body.
