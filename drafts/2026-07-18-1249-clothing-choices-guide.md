@@ -1,0 +1,1 @@
+Wear light cotton materials don’t wear those thick, oversized, polyester clothing if you can afford it wear linen
