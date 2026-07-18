@@ -1,0 +1,1 @@
+To be a good citizen, to contribute positively, lead a good life. Manage your finances so that you don’t become desperate, so that you don’t become a slave to the negative forces.
