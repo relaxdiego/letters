@@ -1,0 +1,1 @@
+People are interesting if you give them a chance.
