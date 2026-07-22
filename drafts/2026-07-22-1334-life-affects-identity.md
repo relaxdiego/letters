@@ -1,0 +1,1 @@
+I sometimes wonder how much events in our life affect who we become, how we think, how we see things. How much of it is shaped by our environment? How much, if any, by genetics. How true really, is the saying I repeat often: “we become what we surround ourselves with.”
