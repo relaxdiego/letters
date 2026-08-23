@@ -1,0 +1,126 @@
+# Ask the Wayback Machine to keep its copy current — at most twice a day.
+#
+# This repository is updated automatically: every change arrives as a commit
+# made at the moment it is published, so a commit's timestamp here is the
+# moment the change went live on the site. git log --since therefore sees
+# exactly what changed since the last run — nothing can be committed early
+# and published late.
+#
+# Saves run on a fixed schedule rather than on every update. Save Page Now
+# throttles hard from cloud IPs (GitHub runners), so a schedule is the
+# simplest rate limit: two runs per day, no matter how often this repo is
+# updated. A run covers any page touched
+# since the previous window, plus the homepage. A run that finds nothing
+# changed saves nothing and exits.
+#
+# This is a courtesy, not a requirement. If archive.org is slow, rate-limiting
+# us, or down, nothing here is allowed to affect the live site.
+
+name: Archive to Wayback Machine
+
+on:
+  schedule:
+    # 06:00 and 18:00 UTC — twelve hours apart, two runs per calendar day.
+    - cron: "0 6,18 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Save the homepage and any recently changed pages
+        continue-on-error: true
+        run: |
+          set -u
+          site="https://letters.maglana.com"
+
+          # Catch everything since the previous twice-daily run, with a little
+          # slack for clock skew and a run that finished late.
+          changed=$(
+            git log --since="14 hours ago" --name-only --pretty=format: \
+              --diff-filter=d -- content/ \
+              | sort -u
+          )
+
+          # A quiet window means nothing to save. Calling Save Page Now twice
+          # a day for a page that did not change spends goodwill we need for
+          # the runs that do have something to archive.
+          if [ -z "$changed" ]; then
+            echo "Nothing under content/ changed since the last run. Nothing to save."
+            exit 0
+          fi
+
+          # The homepage whenever anything changed — content/_index.md holds
+          # only a title, but Hugo rebuilds the homepage's list of letters
+          # every time a letter is added or renamed, so a letter change is a
+          # homepage change. Everything else only when it changed. The about
+          # and recovery pages matter here as much as the letters: Save Page
+          # Now does not follow links, so a page nobody saves is a dead link
+          # inside the archive.
+          urls="$site/"
+          for f in $changed; do
+            case "$f" in
+              content/_index.md) ;;   # the homepage, already in the list
+              content/letters/*.md)
+                slug=$(basename "$f" .md)
+                urls="$urls $site/letters/$slug/"
+                ;;
+              content/*.md)
+                slug=$(basename "$f" .md)
+                urls="$urls $site/$slug/"
+                ;;
+            esac
+          done
+
+          # Save Page Now is slow (20s+ on a good day) and throttles hard from
+          # cloud IPs, so allow real time and retry once. A save that fails is
+          # never allowed to fail a deploy — but it must not pass silently
+          # either. The recovery page tells readers the archive exists; if it
+          # does not, someone has to be told.
+          saved=0
+          failed=""
+          for u in $urls; do
+            echo "Saving $u"
+            code=$(curl -sS -m 300 -L -o /dev/null -w '%{http_code}' \
+              "https://web.archive.org/save/$u" 2>/dev/null || echo 000)
+            if [ "$code" != "200" ]; then
+              sleep 30
+              code=$(curl -sS -m 300 -L -o /dev/null -w '%{http_code}' \
+                "https://web.archive.org/save/$u" 2>/dev/null || echo 000)
+            fi
+            if [ "$code" = "200" ]; then
+              saved=$((saved + 1))
+              echo "  -> saved"
+            else
+              failed="$failed $u"
+              echo "  -> FAILED (HTTP $code)"
+            fi
+            sleep 12
+          done
+
+          echo "saved $saved page(s)"
+          if [ -n "$failed" ]; then
+            echo "::warning title=Wayback Machine save reported an error::Check these:$failed"
+            {
+              echo "### Wayback Machine saves reported an error"
+              echo ""
+              echo "GitHub runners are often throttled by Save Page Now. Note that"
+              echo "an error code does not always mean the page was missed — a 523"
+              echo "in particular is often returned for a page that was saved."
+              echo ""
+              echo "Check first, at \`https://web.archive.org/web/2026/<url>\`, and"
+              echo "only re-save from an ordinary machine if the page is really absent:"
+              echo ""
+              for u in $failed; do
+                echo "- \`curl -L https://web.archive.org/save/$u\`"
+              done
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
